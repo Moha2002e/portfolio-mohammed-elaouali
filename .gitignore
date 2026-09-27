@@ -1,4 +1,4 @@
 .claude/
 tmp/
-portfolio-site.tar.gz
+portfolio-site*.tar.gz
 .sites-runtime/

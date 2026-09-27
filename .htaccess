@@ -1,0 +1,12 @@
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(?:\.claude|\.git|\.openai|tmp)(?:/|$) - [F,L,NC]
+  RewriteRule ^portfolio-site.*\.tar\.gz$ - [F,L,NC]
+</IfModule>
+
+<FilesMatch "^(\.gitignore|\.htaccess|portfolio-site.*\.tar\.gz)$">
+  Require all denied
+</FilesMatch>
