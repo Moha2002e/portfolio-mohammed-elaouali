@@ -34,12 +34,15 @@ if (journey && window.gsap && window.ScrollTrigger && !reduceMotion) {
   gsap.registerPlugin(ScrollTrigger);
 
   const scene = journey.querySelector('.journey-scene');
-  const notes = gsap.utils.toArray('.scene-note', journey);
-  const frames = gsap.utils.toArray('.scene-frame', journey);
-  const tech = gsap.utils.toArray('.scene-tech', journey);
-  const captions = gsap.utils.toArray('.scene-caption', journey);
-
-  gsap.set(notes.slice(1), { opacity: 0 });
+  const intro = journey.querySelector('.journey-intro');
+  const education = journey.querySelector('.frame-education');
+  const experience = journey.querySelector('.frame-experience');
+  const tech = journey.querySelectorAll('.scene-tech');
+  const captions = {
+    education: journey.querySelector('.caption-education'),
+    experience: journey.querySelector('.caption-experience'),
+    projects: journey.querySelector('.caption-projects')
+  };
 
   const timeline = gsap.timeline({
     defaults: { ease: 'none' },
@@ -47,29 +50,24 @@ if (journey && window.gsap && window.ScrollTrigger && !reduceMotion) {
       trigger: journey,
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 1.3,
+      scrub: 1.15,
       pin: scene,
       invalidateOnRefresh: true
     }
   });
 
   timeline
-    .to(notes[0], { opacity: 1, scale: 1, rotate: -6, duration: 0.12 })
-    .to(scene, { scale: 1.08, xPercent: 3, duration: 0.1 })
-    .to(notes[1], { opacity: 1, scale: 1, rotate: 5, duration: 0.12 })
-    .to(scene, { scale: 1.18, xPercent: -4, yPercent: 2, duration: 0.1 })
-    .to(notes[2], { opacity: 1, scale: 1, rotate: -3, duration: 0.12 })
-    .to(frames[0], { opacity: 0.18, scale: 1.1, duration: 0.08 }, '<')
-    .to(scene, { scale: 1.12, xPercent: 5, yPercent: -2, duration: 0.1 })
-    .to(notes[3], { opacity: 1, scale: 1, rotate: 4, duration: 0.12 })
-    .to(tech, { opacity: 1, stagger: 0.04, duration: 0.1 }, '<')
-    .to(frames[1], { opacity: 0.18, scale: 1.1, duration: 0.08 }, '<')
-    .to(scene, { scale: 1.2, xPercent: -3, yPercent: 3, duration: 0.1 })
-    .to(notes[4], { opacity: 1, scale: 1, rotate: -5, duration: 0.12 })
-    .to(scene, { scale: 1.1, xPercent: 2, duration: 0.1 })
-    .to(notes[5], { opacity: 1, scale: 1, rotate: 3, duration: 0.12 })
-    .to(captions, { opacity: 0, duration: 0.06 }, '<')
-    .to(scene, { scale: 1.18, xPercent: -2, yPercent: -2, duration: 0.1 })
-    .to(notes[6], { opacity: 1, scale: 1, rotate: -4, duration: 0.12 })
-    .to(scene, { scale: 1, xPercent: 0, yPercent: 0, duration: 0.14 });
+    .to(intro, { opacity: 0, y: -70, duration: 0.16 })
+    .to(scene, { scale: 1.42, xPercent: 12, yPercent: 3, duration: 0.22 }, '<')
+    .to(education, { x: '22vw', y: '9vh', rotate: 0, duration: 0.2 }, '<')
+    .to(captions.education, { opacity: 1, y: -8, duration: 0.08 })
+    .to(scene, { scale: 1.08, xPercent: -9, yPercent: -2, duration: 0.22 })
+    .to(education, { opacity: 0.35, duration: 0.08 }, '<')
+    .to(experience, { x: '-16vw', y: '5vh', rotate: 0, duration: 0.2 }, '<')
+    .to(tech, { opacity: 1, stagger: 0.06, duration: 0.12 }, '<')
+    .to(captions.experience, { opacity: 1, y: -8, duration: 0.08 })
+    .to(scene, { scale: 1.24, xPercent: 2, yPercent: 5, duration: 0.22 })
+    .to(experience, { opacity: 0.3, duration: 0.08 }, '<')
+    .to(captions.projects, { opacity: 1, y: -8, duration: 0.1 })
+    .to(scene, { scale: 1, xPercent: 0, yPercent: 0, duration: 0.18 });
 }
