@@ -24,7 +24,10 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 
-document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+document.querySelectorAll('.reveal').forEach((element) => {
+  element.classList.add('reveal-ready');
+  revealObserver.observe(element);
+});
 
 document.querySelectorAll('.skills-grid .skill-card, .projects-grid .project-card, .formation-grid .formation-card').forEach((el, i) => {
   el.style.transitionDelay = `${Math.min(i, 5) * 80}ms`;
